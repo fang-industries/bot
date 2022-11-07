@@ -1,5 +1,6 @@
 {
   "misc": {
-    "timezone": "Asia/Jakarta"
+    "timezone": "Asia/Jakarta",
+    "tuya_openapi": "https://openapi.tuyaus.com/v1.0/iot-03/devices/{{DEVICE_ID}}/commands"
   }
 }
