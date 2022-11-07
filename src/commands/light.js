@@ -82,7 +82,14 @@ module.exports = {
         .digest("hex");
 
       // String to sign
-      const stringToSign = ["POST", contentHash, "", tuyaOpenAPI].join("\n");
+      const stringToSign = [
+        "POST",
+        contentHash,
+        `client_id: ${process.env.TUYA_ACCS}`,
+        tuyaOpenAPI,
+      ].join("\n");
+
+      console.log(stringToSign);
 
       // Signed string should be composed of this
       const signStr = process.env.TUYA_ACCS + token + t + stringToSign;

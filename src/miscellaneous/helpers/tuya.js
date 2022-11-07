@@ -16,6 +16,7 @@
 // Import needed modules
 const crypto = require("crypto");
 const fetch = require("node-fetch");
+require("dotenv").config();
 
 // Tuya HMAC-SHA256 encryption algorithm
 const encryptStr = async function (str, secret) {
@@ -56,6 +57,6 @@ module.exports.getToken = async function () {
   return await getToken();
 };
 
-module.exports.encryptStr = async function () {
-  return await encryptStr();
+module.exports.encryptStr = async function (str, secret) {
+  return await encryptStr(str, secret);
 };
