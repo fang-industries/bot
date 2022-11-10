@@ -19,6 +19,10 @@ module.exports = {
 
   async execute(interaction) {
     const randomVerse = verses[Math.floor(Math.random() * verses.length)];
-    console.log(randomVerse);
+    const embed = EmbedBuilder()
+        .setColor(0xF1B581)
+        .setTitle(`🐔 ${randomVerse.title} 🐔`)
+        .setDescription(randomVerse.content)
+    await interaction.reply({ embeds: [embed] })
   },
 };
