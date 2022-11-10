@@ -34,19 +34,18 @@ module.exports = {
     const wsPing = Number(Math.round(interaction.client.ws.ping))
     let pingam 
     // Conditions
-    if (clientPing || wsPing < 50) {
+    if (clientPing < 50) {
       pingam = ":green_circle:"
-    } else if (clientPing || wsPing > 50) {
+    } else if (clientPing > 50) {
       pingam = ":yellow_circle"
-    } else if (clientPing || wsPing > 200) {
+    } else if (clientPing > 200) {
       pingam = ":red_circle"
-    } else if (clientPing || wsPing == 0) {
+    } else if (clientPing == 0) {
       pingam = ":sparkles:"
     }
     // Reply to the user with "Pong!"
     await interaction.reply(
-      `**Ping** is ${clientPing} ms ${pingam}.
-      **API Ping** is ${wsPing} ms ${pingam}.`
+      `**Ping** is ${clientPing} ms ${pingam}.\n**API Ping** is ${wsPing} ms`
     );
   },
 };
