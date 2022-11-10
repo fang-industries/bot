@@ -28,13 +28,13 @@ module.exports = {
     .setName("colour")
     .setDescription("Gives the member a given colour of their choosing.")
     .addStringOption((opt) =>
-      opt.setName("name").setDescription("What would you like your role named?")
-    )
-    .addStringOption((opt) =>
       opt
         .setName("hex")
         .setDescription("Provide a hex code for your role colour.")
         .setRequired(true)
+    )
+    .addStringOption((opt) =>
+      opt.setName("name").setDescription("What would you like your role named?")
     ),
 
   // Execute the command asynchronously
