@@ -32,20 +32,21 @@ module.exports = {
     // Define the two pings
     const clientPing = Number(Date.now() - interaction.createdTimestamp)
     const wsPing = Number(Math.round(interaction.client.ws.ping))
+    const avgping = Math.round(wsPing + clientPing / 2)
     let pingam 
     // Conditions
-    if (clientPing < 50) {
+    if (avgping < 50) {
       pingam = ":green_circle:"
-    } else if (clientPing > 50) {
+    } else if (avgping > 50) {
       pingam = ":yellow_circle:"
-    } else if (clientPing > 200) {
-      pingam = ":red_circle"
-    } else if (clientPing == 0) {
+    } else if (avgping > 200) {
+      pingam = ":red_circle:"
+    } else if (avgping == 0) {
       pingam = ":sparkles:"
     }
     // Reply to the user with the latency
     await interaction.reply(
-      `**Ping** is ${clientPing} ms ${pingam}.\n**API Ping** is ${wsPing} ms`
+      `${pingam} **Ping** is ${clientPing} ms.\n**API Ping** is ${wsPing} ms`
     );
   },
 };
