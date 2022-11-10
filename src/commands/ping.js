@@ -29,10 +29,14 @@ module.exports = {
 
   // Execute the command asynchronously
   async execute(interaction) {
+    // Define the two pings
+    const clientPing = Date.now() - message.createdTimestamp;
+    const wsPing = Math.round(client.ws.ping);
+
     // Reply to the user with "Pong!"
     await interaction.reply(
-      `**Ping** is ${Date.now() - message.createdTimestamp} ms. \n \n
-      **API Ping** is ${Math.round(client.ws.ping)} ms`
+      `**Ping** is ${clientPing} ms. \n \n
+      **API Ping** is ${wsPing} ms`
     );
   },
 };
