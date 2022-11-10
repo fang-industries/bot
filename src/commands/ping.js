@@ -30,30 +30,34 @@ module.exports = {
   // Execute the command asynchronously
   async execute(interaction) {
     // Define the two pings
-    const clientPing = Number(Date.now() - interaction.createdTimestamp);
-    const wsPing = Number(Math.round(interaction.client.ws.ping));
+    const clientPing = Date.now() - interaction.createdTimestamp;
+    const wsPing = Math.round(interaction.client.ws.ping);
 
     function pingEmoji(number) {
-      if (number < 10) {
-        return ":sparkles:";
-      } else if (number > 10) {
+      if (number <= 10) {
+        return "✨";
+      } else if (number <= 50) {
         return "🟢";
-      } else if (number > 50) {
+      } else if (number <= 250) {
         return "🟡";
-      } else {
+      } else if (number <= 500) {
         return "🔴";
+      } else {
+        return "💩";
       }
     }
 
     function pingResult(number) {
-      if (number < 10) {
+      if (number <= 10) {
         return "amazing";
-      } else if (number > 10) {
+      } else if (number <= 50) {
         return "great";
-      } else if (number > 50) {
+      } else if (number <= 250) {
         return "fine";
-      } else {
+      } else if (number <= 500) {
         return "bad";
+      } else {
+        return "terrible";
       }
     }
 
@@ -63,12 +67,12 @@ module.exports = {
       .addFields(
         {
           name: `${pingEmoji(clientPing)} Client Ping`,
-          value: clientPing,
+          value: clientPing.toString(),
           inline: true,
         },
         {
           name: `${pingEmoji(wsPing)} Websocket Ping`,
-          value: wsPing,
+          value: wsPing.toString(),
           inline: true,
         },
         {
