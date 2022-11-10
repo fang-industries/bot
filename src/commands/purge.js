@@ -8,7 +8,7 @@
  */
 
 // Import the required modules
-const { SlashCommandBuilder, EmbedBuilder, InteractionResponse } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 // Export the command data for loader
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
             .setName("amount")
             .setDescription("Set the amount of messages deleted.")
     ),
-    
+
   // Interaction processing
     async execute(interaction) {
         const deleteAmount = interaction.options.getInteger("amount")
