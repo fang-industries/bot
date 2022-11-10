@@ -32,16 +32,16 @@ module.exports = {
     // Define the two pings
     const clientPing = Date.now() - interaction.createdTimestamp;
     const wsPing = Math.round(interaction.client.ws.ping);
-    var pingam 
+    let pingam 
     // Conditions
     if (clientPing || wsPing < 50) {
-      var pingam = ":green_circle:"
+      pingam = ":green_circle:"
     } else if (clientPing || wsPing > 50) {
-      var pingam = ":yellow_circle"
+      pingam = ":yellow_circle"
     } else if (clientPing || wsPing > 200) {
-      var pingam = ":red_circle"
+      pingam = ":red_circle"
     } else if (clientPing || wsPing == 0) {
-      var pingam = ":sparkle:"
+      pingam = ":sparkles:"
     }
     // Reply to the user with "Pong!"
     await interaction.reply(
@@ -50,7 +50,7 @@ module.exports = {
       :red_circle: - Bad Ping
       :yellow_circle: - Average Ping
       :green_circle: - Good Ping 
-      :sparkle: - Excellent Ping`
+      :sparkles: - Excellent Ping`
     );
   },
 };
