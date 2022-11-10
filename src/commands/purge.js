@@ -40,7 +40,7 @@ module.exports = {
 
     // Finally, reply to the user
     await interaction.reply({
-      content: `Purging complete - ${deleteAmount} messages deleted 😈.`,
+      content: `Purging complete - ${deleteAmount} messages was deleted! 😈`,
       ephemeral: true,
     });
   },
