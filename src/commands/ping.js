@@ -30,8 +30,8 @@ module.exports = {
   // Execute the command asynchronously
   async execute(interaction) {
     // Define the two pings
-    const clientPing = Date.now() - interaction.createdTimestamp;
-    const wsPing = Math.round(interaction.client.ws.ping);
+    const clientPing = Number(Date.now() - interaction.createdTimestamp)
+    const wsPing = Number(Math.round(interaction.client.ws.ping))
     let pingam 
     // Conditions
     if (clientPing || wsPing < 50) {
