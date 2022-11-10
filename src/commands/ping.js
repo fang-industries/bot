@@ -15,17 +15,17 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 module.exports = {
   /*
    * Command      : /ping
-   * Description  : Pong!
+   * Description  : Fetches the client and websocket ping.
    *
    * What it does : A basic ping command, it
    *                responds with the WS and
-   *                cient ping.
+   *                client ping.
    */
 
   // Define data for loader
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Replies with the Client and API Ping"),
+    .setDescription("Fetches the client and websocket ping."),
 
   // Execute the command asynchronously
   async execute(interaction) {
@@ -33,26 +33,26 @@ module.exports = {
     const clientPing = Number(Date.now() - interaction.createdTimestamp);
     const wsPing = Number(Math.round(interaction.client.ws.ping));
 
-    function pingEmoji(int) {
-      if (int < 10) {
+    function pingEmoji(number) {
+      if (number < 10) {
         return ":sparkles:";
-      } else if (int > 10) {
+      } else if (number > 10) {
         return "🟢";
-      } else if (int > 50) {
+      } else if (number > 50) {
         return "🟡";
-      } else if (int > 200) {
+      } else {
         return "🔴";
       }
     }
 
-    function pingResult(int) {
-      if (int < 10) {
+    function pingResult(number) {
+      if (number < 10) {
         return "amazing";
-      } else if (int > 10) {
+      } else if (number > 10) {
         return "great";
-      } else if (int > 50) {
+      } else if (number > 50) {
         return "fine";
-      } else if (int > 200) {
+      } else {
         return "bad";
       }
     }
