@@ -34,6 +34,7 @@ module.exports = {
       opt
         .setName("hex")
         .setDescription("Provide a hex code for your role colour.")
+        .setRequired(true)
     ),
 
   // Execute the command asynchronously
