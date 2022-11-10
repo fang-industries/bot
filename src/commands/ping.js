@@ -46,11 +46,7 @@ module.exports = {
     // Reply to the user with "Pong!"
     await interaction.reply(
       `**Ping** is ${clientPing} ms ${pingam}.
-      **API Ping** is ${wsPing} ms ${pingam}.
-      :red_circle: - Bad Ping
-      :yellow_circle: - Average Ping
-      :green_circle: - Good Ping 
-      :sparkles: - Excellent Ping`
+      **API Ping** is ${wsPing} ms ${pingam}.`
     );
   },
 };
