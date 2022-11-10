@@ -45,7 +45,7 @@ module.exports = {
     }
     // Reply to the user with "Pong!"
     await interaction.reply(
-      `**Ping** is ${clientPing} ms ${pingam}. \n \n
+      `**Ping** is ${clientPing} ms ${pingam}. \n
       **API Ping** is ${wsPing} ms ${pingam}`
     );
   },
