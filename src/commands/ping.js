@@ -37,7 +37,7 @@ module.exports = {
     if (clientPing < 50) {
       pingam = ":green_circle:"
     } else if (clientPing > 50) {
-      pingam = ":yellow_circle"
+      pingam = ":yellow_circle:"
     } else if (clientPing > 200) {
       pingam = ":red_circle"
     } else if (clientPing == 0) {
