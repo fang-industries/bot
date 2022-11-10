@@ -61,22 +61,24 @@ module.exports = {
       }
     }
 
-    function pingColor(number) {
-      if (number <= 10) {
-        return 0xFFAC33;
-      } else if (number <= 50) {
-        return 0x79B059;
-      } else if (number <= 250) {
-        return 0xFCCA58;
-      } else if (number <= 500) {
-        return 0xDC2F44;
-      } else {
-        return 0xBF6952;
-      }
+    const avgPing = Math.round(wsPing + clientPing / 2);
+
+    let pingColour;
+
+    if (avgPing <= 10) {
+      pingColour = 0xffac33;
+    } else if (avgPing <= 50) {
+      pingColour = 0x79b059;
+    } else if (avgPing <= 250) {
+      pingColour = 0xfcca58;
+    } else if (avgPing <= 500) {
+      pingColour = 0xdc2f44;
+    } else {
+      pingColour = 0xbf6952;
     }
 
     const embed = new EmbedBuilder()
-      .setColor(pingColor)
+      .setColor(pingColour)
       .setTitle("Ping-pong! 🏓")
       .addFields(
         {
@@ -91,9 +93,9 @@ module.exports = {
         },
         {
           name: "Results",
-          value: `Overall, the ping is ${pingResult(
-            Math.round(wsPing + clientPing / 2)
-          )}.`,
+          value: `Overall, the average ping is ${pingResult(
+            avgPing
+          )}. (${avgPing})`,
         }
       );
 
