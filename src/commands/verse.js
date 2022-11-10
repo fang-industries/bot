@@ -13,7 +13,7 @@ const { SlashCommandBuilder } = require("discord.js");
 // Export the command data for loader
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("wisewords")
+        .setName("gospel")
         .setDescription("Wise words"),
 
     async execute(interaction) {}
