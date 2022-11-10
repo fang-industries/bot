@@ -61,8 +61,22 @@ module.exports = {
       }
     }
 
+    function pingColor(number) {
+      if (number <= 10) {
+        return 0xFFAC33;
+      } else if (number <= 50) {
+        return 0x79B059;
+      } else if (number <= 250) {
+        return 0xFCCA58;
+      } else if (number <= 500) {
+        return 0xDC2F44;
+      } else {
+        return 0xBF6952;
+      }
+    }
+
     const embed = new EmbedBuilder()
-      .setColor(0x0099ff)
+      .setColor(pingColor)
       .setTitle("Ping-pong! 🏓")
       .addFields(
         {
