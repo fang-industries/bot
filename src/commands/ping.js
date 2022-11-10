@@ -33,6 +33,7 @@ module.exports = {
     const clientPing = Date.now() - interaction.createdTimestamp;
     const wsPing = Math.round(interaction.client.ws.ping);
 
+    // Use different emojis for different pings
     function pingEmoji(number) {
       if (number <= 10) {
         return "✨";
@@ -47,6 +48,7 @@ module.exports = {
       }
     }
 
+    // Determine what word to use for result
     function pingResult(number) {
       if (number <= 10) {
         return "amazing";
@@ -61,10 +63,13 @@ module.exports = {
       }
     }
 
+    // Define average ping
     const avgPing = Math.round(wsPing + clientPing / 2);
 
+    // Variable for ping colours
     let pingColour;
 
+    // Use a different embed colour for average ping
     if (avgPing <= 10) {
       pingColour = 0xffac33;
     } else if (avgPing <= 50) {
@@ -77,6 +82,7 @@ module.exports = {
       pingColour = 0xbf6952;
     }
 
+    // Create the ping embed
     const embed = new EmbedBuilder()
       .setColor(pingColour)
       .setTitle("Ping-pong! 🏓")

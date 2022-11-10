@@ -58,14 +58,14 @@ module.exports = {
       }
     }
 
-    console.log(hexToRgb());
-
+    // Create role for user
     const role = await interaction.guild.roles.create({
       name:
         interaction.options.getString("name") ?? interaction.member.displayName,
       color: hexToRgb(),
     });
 
+    // Give the user the newly created role
     const givenRole = interaction.guild.roles.cache.get(role.id);
     interaction.member.roles.add(givenRole).catch(console.error);
 
