@@ -21,23 +21,27 @@ module.exports = {
    */
 
   // Define data for loader
-
   data: new SlashCommandBuilder()
-  // Slash Command Info
     .setName("purge")
     .setDescription("Mass deletes messages. Purging time.")
     .addIntegerOption((opt) =>
-        opt
-            .setName("amount")
-            .setDescription("Set the amount of messages deleted.")
+      opt
+        .setName("amount")
+        .setDescription("Set the amount of messages deleted.")
     ),
 
-  // Interaction processing
-    async execute(interaction) {
-        const deleteAmount = interaction.options.getInteger("amount")
-        await interaction.channel.bulkDelete(deleteAmount)
-        await interaction.reply({ content:`${deleteAmount} messages deleted 😈.`, ephemeral: true })
-    }
+  // Execute the command asynchronously
+  async execute(interaction) {
+    // Define the amount of messages that will be deleted
+    const deleteAmount = interaction.options.getInteger("amount");
 
-    
-}
+    // Delete the given amount of messages
+    await interaction.channel.bulkDelete(deleteAmount);
+
+    // Finally, reply to the user
+    await interaction.reply({
+      content: `Purging complete - ${deleteAmount} messages deleted 😈.`,
+      ephemeral: true,
+    });
+  },
+};
