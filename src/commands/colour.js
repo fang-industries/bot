@@ -9,8 +9,7 @@
  */
 
 // Import the required modules
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { parse } = require("dotenv");
+const { SlashCommandBuilder } = require("discord.js");
 
 // Export the command data for loader
 module.exports = {
@@ -39,30 +38,22 @@ module.exports = {
 
   // Execute the command asynchronously
   async execute(interaction) {
-    // Parse hex to rgb
-    function hexToRgb() {
-      const aRgbHex = interaction.options.getString("hex").match(/.{1,2}/g);
+    // Parse colours, remove # if it exists
+    const returnedColour = interaction.options.getString("hex");
 
-      if (interaction.options.getString("hex").startsWith("#")) {
-        return [
-          parseInt(aRgbHex.slice("1")[0], 16),
-          parseInt(aRgbHex.slice("1")[1], 16),
-          parseInt(aRgbHex.slice("1")[2], 16),
-        ];
-      } else {
-        return [
-          parseInt(aRgbHex[0], 16),
-          parseInt(aRgbHex[1], 16),
-          parseInt(aRgbHex[2], 16),
-        ];
+    function parseColour() {
+      if (returnedColour.startsWith("#")) {
+        return returnedColour.slice(1);
       }
+
+      return null;
     }
 
     // Create role for user
     const role = await interaction.guild.roles.create({
       name:
         interaction.options.getString("name") ?? interaction.member.displayName,
-      color: hexToRgb(),
+      color: "0x" + (parseColour() ?? interaction.options.getString("hex")),
     });
 
     // Give the user the newly created role
