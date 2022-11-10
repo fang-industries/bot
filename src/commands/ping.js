@@ -32,10 +32,20 @@ module.exports = {
     // Define the two pings
     const clientPing = Date.now() - message.createdTimestamp;
     const wsPing = Math.round(client.ws.ping);
-
+    var pingam 
+    // Conditions
+    if (clientPing < 50) {
+      var pingam = ":green_circle:"
+    } else if (clientPing > 50) {
+      var pingam = ":yellow_circle"
+    } else if (clientPing > 200) {
+      var pingam = ":red_circle"
+    } else if (clientPing == 0) {
+      var pingam = ":sparkle:"
+    }
     // Reply to the user with "Pong!"
     await interaction.reply(
-      `**Ping** is ${clientPing} ms. \n \n
+      `**Ping** is ${clientPing} ms ${pingam}. \n \n
       **API Ping** is ${wsPing} ms`
     );
   },
