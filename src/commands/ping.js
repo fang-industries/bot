@@ -43,7 +43,7 @@ module.exports = {
     } else if (clientPing == 0) {
       pingam = ":sparkles:"
     }
-    // Reply to the user with "Pong!"
+    // Reply to the user with the latency
     await interaction.reply(
       `**Ping** is ${clientPing} ms ${pingam}.\n**API Ping** is ${wsPing} ms`
     );
