@@ -25,7 +25,6 @@ module.exports = {
 
   // Define data for loader
   name: Events.InteractionCreate,
-  once: true,
 
   // Execute the event asynchronously
   async execute(interaction) {
