@@ -23,6 +23,7 @@ module.exports = {
   // Define data for loader
 
   data: new SlashCommandBuilder()
+  // Slash Command Info
     .setName("purge")
     .setDescription("Mass deletes messages. Purging time.")
     .addIntegerOption((opt) =>
@@ -30,7 +31,8 @@ module.exports = {
             .setName("amount")
             .setDescription("Set the amount of messages deleted.")
     ),
-
+    
+  // Interaction processing
     async execute(interaction) {
         const deleteAmount = interaction.options.getInteger("amount")
         await interaction.channel.bulkDelete(deleteAmount)
