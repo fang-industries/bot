@@ -32,7 +32,7 @@ module.exports = {
     const randomVerse = verses[Math.floor(Math.random() * verses.length)];
 
     // Create embed
-    const embed = EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setColor(0xf1b581)
       .setTitle(`🐔 ${randomVerse.title} 🐔`)
       .setDescription(randomVerse.content);
