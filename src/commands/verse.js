@@ -11,15 +11,14 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const verses = require("../miscellaneous/assets/verses.json");
 
-
 // Export the command data for loader
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName("gospel")
-        .setDescription("Wise words"),
+  data: new SlashCommandBuilder()
+    .setName("gospel")
+    .setDescription("Some words of wisdom from the almighty chicken God."),
 
-    async execute(interaction) {
-        const randomVerse = Math.floor(Math.random() * verses.length)
-        console.log(randomVerse)
-    }
-}
+  async execute(interaction) {
+    const randomVerse = verses[Math.floor(Math.random() * verses.length)];
+    console.log(randomVerse);
+  },
+};
