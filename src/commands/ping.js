@@ -83,19 +83,19 @@ module.exports = {
       .addFields(
         {
           name: `${pingEmoji(clientPing)} Client Ping`,
-          value: clientPing.toString(),
+          value: clientPing.toString() + " ms",
           inline: true,
         },
         {
           name: `${pingEmoji(wsPing)} Websocket Ping`,
-          value: wsPing.toString(),
+          value: wsPing.toString() + " ms",
           inline: true,
         },
         {
           name: "Results",
           value: `Overall, the average ping is ${pingResult(
             avgPing
-          )}. (${avgPing})`,
+          )}. (${avgPing} ms)`,
         }
       );
 
