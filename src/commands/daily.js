@@ -10,6 +10,7 @@
 
 // Import the required modules
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const fetch = require("node-fetch");
 
 // Export the command data for loader
 module.exports = {
@@ -30,6 +31,11 @@ module.exports = {
       opt
         .setName("timezone")
         .setDescription("Use a different timezone for the output")
+    )
+    .addStringOption((opt) =>
+      opt
+        .setName("location")
+        .setDescription("Use a different location for the output")
     ),
 
   // Execute the command asynchronously
@@ -41,6 +47,20 @@ module.exports = {
     const timezone = interaction.options.getString("timezone")
       ? interaction.options.getString("timezone")
       : require("../../config.json").misc.timezone;
+
+    // Define the location given from user input, otherwise use config.
+    const location = interaction.options.getString("location")
+      ? interaction.options.getString("location")
+      : require("../../config.json").misc.location;
+
+    // Fetches from APIs
+    const weather = await fetch(
+      `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.openwm}&units=metric`
+    ).then((res) => res.json());
+
+    const covid = await fetch(
+      `https://disease.sh/v3/covid-19/countries/ID`
+    ).then((res) => res.json());
 
     // Definition for different properties
     const time = clock
@@ -87,6 +107,28 @@ module.exports = {
       }
     };
 
+    // Emojis for different weather
+    const weatherEmoji = () => {
+      switch (weather.weather[0].main) {
+        case "Thunderstorm":
+          return "⛈";
+        case "Drizzle":
+          return "🌧";
+        case "Rain":
+          return "🌦";
+        case "Snow":
+          return "❄";
+        case "Atmosphere":
+          return "🌫";
+        case "Clear":
+          return "☀";
+        case "Clouds":
+          return "🌥";
+        default:
+          return "🌡";
+      }
+    };
+
     const embed = new EmbedBuilder()
       .setAuthor({
         name: `Good ${greeting()}, ${interaction.member.displayName}!`,
@@ -96,6 +138,20 @@ module.exports = {
       .setDescription(
         "This command is currently a work-in-progress! Please be patient."
       );
+
+    embed.addFields({
+      name: `${weatherEmoji()} Weather`,
+      value: `It is currently \`${weather.main.temp
+        .toString()
+        .slice(0, 2)}°C\` with a wind speed of \`${weather.wind.speed} m/s\`.`,
+    });
+
+    embed.addFields({
+      name: `🦠 COVID-19`,
+      value: `There are ${covid.todayCases.toLocaleString(
+        "en-GB"
+      )} new Coronavirus cases today.`,
+    });
 
     // Reply to the user with the current time.
     await interaction.reply({ embeds: [embed] });
