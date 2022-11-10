@@ -30,18 +30,18 @@ module.exports = {
   // Execute the command asynchronously
   async execute(interaction) {
     // Define the two pings
-    const clientPing = Date.now() - message.createdTimestamp;
-    const wsPing = Math.round(client.ws.ping);
-    var pingam 
+    const clientPing = Date.now() - interaction.createdTimestamp;
+    const wsPing = Math.round(interaction.client.ws.ping);
+    var pingam;
     // Conditions
     if (clientPing || wsPing < 50) {
-      var pingam = ":green_circle:"
+      var pingam = ":green_circle:";
     } else if (clientPing || wsPing > 50) {
-      var pingam = ":yellow_circle"
+      var pingam = ":yellow_circle";
     } else if (clientPing || wsPing > 200) {
-      var pingam = ":red_circle"
+      var pingam = ":red_circle";
     } else if (clientPing || wsPing == 0) {
-      var pingam = ":sparkle:"
+      var pingam = ":sparkle:";
     }
     // Reply to the user with "Pong!"
     await interaction.reply(
