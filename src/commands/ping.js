@@ -9,7 +9,7 @@
  */
 
 // Import the required modules
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 // Export the command data for loader
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
    *
    * What it does : A basic ping command, it
    *                responds with the WS and
-   *                client ping.
+   *                cient ping.
    */
 
   // Define data for loader
@@ -30,23 +30,56 @@ module.exports = {
   // Execute the command asynchronously
   async execute(interaction) {
     // Define the two pings
-    const clientPing = Number(Date.now() - interaction.createdTimestamp)
-    const wsPing = Number(Math.round(interaction.client.ws.ping))
-    const avgping = Math.round(wsPing + clientPing / 2)
-    let pingam 
-    // Conditions
-    if (avgping < 50) {
-      pingam = ":green_circle:"
-    } else if (avgping > 50) {
-      pingam = ":yellow_circle:"
-    } else if (avgping > 200) {
-      pingam = ":red_circle:"
-    } else if (avgping == 0) {
-      pingam = ":sparkles:"
+    const clientPing = Number(Date.now() - interaction.createdTimestamp);
+    const wsPing = Number(Math.round(interaction.client.ws.ping));
+
+    function pingEmoji(int) {
+      if (int < 10) {
+        return ":sparkles:";
+      } else if (int > 10) {
+        return "🟢";
+      } else if (int > 50) {
+        return "🟡";
+      } else if (int > 200) {
+        return "🔴";
+      }
     }
+
+    function pingResult(int) {
+      if (int < 10) {
+        return "amazing";
+      } else if (int > 10) {
+        return "great";
+      } else if (int > 50) {
+        return "fine";
+      } else if (int > 200) {
+        return "bad";
+      }
+    }
+
+    const embed = new EmbedBuilder()
+      .setColor(0x0099ff)
+      .setTitle("Ping-pong! 🏓")
+      .addFields(
+        {
+          name: `${pingEmoji(clientPing)} Client Ping`,
+          value: clientPing,
+          inline: true,
+        },
+        {
+          name: `${pingEmoji(wsPing)} Websocket Ping`,
+          value: wsPing,
+          inline: true,
+        },
+        {
+          name: "Results",
+          value: `Overall, the ping is ${pingResult(
+            Math.round(wsPing + clientPing / 2)
+          )}.`,
+        }
+      );
+
     // Reply to the user with the latency
-    await interaction.reply(
-      `${pingam} **Ping** is ${clientPing} ms.\n**API Ping** is ${wsPing} ms`
-    );
+    await interaction.reply({ embeds: [embed] });
   },
 };
