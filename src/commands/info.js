@@ -10,7 +10,6 @@
 
 // Import the required modules
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const roles = require("../miscellaneous/assets/roles.json");
 
 // Export the command data for loader
 module.exports = {
