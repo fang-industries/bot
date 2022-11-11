@@ -61,6 +61,7 @@ module.exports = {
           inline: true,
         }
       )
+      .setTimestamp()
       .setFooter({
         iconURL: interaction.guild.iconURL(),
         text: "Brought to you by, Wingstart",
