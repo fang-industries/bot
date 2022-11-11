@@ -26,8 +26,8 @@ module.exports = {
 
   // Define data for loader
   data: new SlashCommandBuilder()
-    .setName("info")
-    .setDescription("Displays server information."),
+    .setName("guild")
+    .setDescription("Displays this server's information."),
 
   // Execute the command asynchronously
   async execute(interaction) {
