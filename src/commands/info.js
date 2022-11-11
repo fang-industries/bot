@@ -27,11 +27,6 @@ module.exports = {
 
   // Execute the command asynchronously
   async execute(interaction) {
-    const clock = new Date()
-    const timezone = interaction.options.getString("timezone")
-    const time = clock.toLocaleTimeString("en-GB", {
-      timezone,
-    })
     const embed = EmbedBuilder()
       .setColor(0xe26b21)
       .setTitle(interaction.guild.name)
