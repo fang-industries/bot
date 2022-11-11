@@ -28,6 +28,7 @@ module.exports = {
       opt
         .setName("amount")
         .setDescription("Set the amount of messages deleted.")
+        .setMaxValue(100)
     ),
 
   // Execute the command asynchronously
