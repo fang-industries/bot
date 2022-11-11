@@ -27,7 +27,7 @@ module.exports = {
 
   // Execute the command asynchronously
   async execute(interaction) {
-    const embed = EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setColor(0xe26b21)
       .setTitle(interaction.guild.name)
       .setDescription("Small community of friends.")
