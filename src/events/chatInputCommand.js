@@ -11,6 +11,7 @@
 
 // Import the required modules
 const { Events } = require("discord.js");
+const config = require("../../config.json");
 
 // Export the command data for loader
 module.exports = {
@@ -41,8 +42,15 @@ module.exports = {
           "We're sorry, an internal error has occurred. Rest assured, we are trying to fix this as fast as possible.",
         ephemeral: true,
       });
+
       console.error(
         `[ERR] No command matching ${interaction.commandName} was found! Did you re-deploy your commands?`
+      );
+
+      // Log to error to debug channel
+      const channel = client.channels.cache.get(config.bot.debug);
+      channel.send(
+        `ERR] No command matching ${interaction.commandName} was found! Did you re-deploy your commands?`
       );
       return;
     }
@@ -50,9 +58,16 @@ module.exports = {
     try {
       // Try to execute the command
       await cmd.execute(interaction);
-    } catch (err) {
+    } catch (e) {
       // If the execution fails, log to console and return an error message
-      console.error(err);
+
+      // Log the error to console
+      console.error(e);
+
+      // Log to error to debug channel
+      const channel = client.channels.cache.get(config.bot.debug);
+      channel.send(`I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``);
+
       await interaction.reply({
         content:
           "We're sorry, an internal error has occurred. Rest assured, we are trying to fix this as fast as possible.",

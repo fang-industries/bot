@@ -49,7 +49,14 @@ module.exports = {
             fs.readFileSync("./src/miscellaneous/assets/rules.txt", "utf8")
           );
         } catch (e) {
+          // Log the error to console
           console.error(e);
+
+          // Log to error to debug channel
+          const channel = client.channels.cache.get(config.bot.debug);
+          channel.send(
+            `I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``
+          );
         }
       }
     }

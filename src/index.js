@@ -31,3 +31,13 @@ require("./miscellaneous/loader/event")(client);
 
 // Finally, login to the Discord API
 client.login(process.env.BOT_TOKEN);
+
+// Preventing exits on crashes
+process.on("unhandledRejection", (e) => {
+  // Log the error to console
+  console.error(e);
+
+  // Log to error to debug channel
+  const channel = client.channels.cache.get(config.bot.debug);
+  channel.send(`I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``);
+});

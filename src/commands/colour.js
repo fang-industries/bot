@@ -10,6 +10,7 @@
 
 // Import the required modules
 const { SlashCommandBuilder } = require("discord.js");
+const config = require("../../config.json");
 
 // Export the command data for loader
 module.exports = {
@@ -58,7 +59,14 @@ module.exports = {
 
     // Give the user the newly created role
     const givenRole = interaction.guild.roles.cache.get(role.id);
-    interaction.member.roles.add(givenRole).catch(console.error);
+    interaction.member.roles.add(givenRole).catch((e) => {
+      // Log the error to console
+      console.error(e);
+
+      // Log to error to debug channel
+      const channel = client.channels.cache.get(config.bot.debug);
+      channel.send(`I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``);
+    });
 
     // Finally, reply with a response to the user
     await interaction.reply({

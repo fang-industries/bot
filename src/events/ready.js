@@ -10,6 +10,7 @@
 
 // Import the required modules
 const { Events } = require("discord.js");
+const config = require("../../config.json");
 
 // Export the command data for loader
 module.exports = {
@@ -28,5 +29,9 @@ module.exports = {
   // Execute the event
   execute(client) {
     console.log("The bot is ready! Logged in as " + client.user.tag);
+
+    // Send a message to the debug channel
+    const channel = client.channels.cache.get(config.bot.debug);
+    channel.send("Bot is online!");
   },
 };
