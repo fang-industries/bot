@@ -16,7 +16,13 @@ require("dotenv").config();
 console.clear();
 
 // Create a new client and a collection for the commands
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 client.commands = new Collection();
 
 // Call the command and event loader
