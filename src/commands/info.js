@@ -28,6 +28,7 @@ module.exports = {
   // Execute the command asynchronously
   async execute(interaction) {
     const clock = new Date()
+    const timezone = interaction.options.getString("timezone")
     const time = clock.toLocaleTimeString("en-GB", {
       timezone,
     })
