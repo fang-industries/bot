@@ -33,29 +33,28 @@ module.exports = {
       .setDescription("Small community of friends.")
       .setThumbnail(interaction.guild.icon.toString())
       .setAuthor({
-            name: `Glad you asked, ${interaction.member.displayName}`
+        name: `Glad you asked, ${interaction.member.displayName}`,
       })
       .addFields(
         {
-            name: "This server has: ",
-            value: `${interaction.guild.memberCount} members`,  
-            inline: true
-        },
-        { 
-            name: "The server was created at: ",
-            value: interaction.guild.createdTimestamp.toString(),
-            inline: true
+          name: "This server has: ",
+          value: `${interaction.guild.memberCount} members`,
+          inline: true,
         },
         {
-            name: "You joined the server at: ",
-            value: interaction.guild.joinedTimestamp.toString(),
-            inline: true
-        }
-        .setFooter({
+          name: "The server was created at: ",
+          value: interaction.guild.createdTimestamp.toString(),
+          inline: true,
+        },
+        {
+          name: "You joined the server at: ",
+          value: interaction.guild.joinedTimestamp.toString(),
+          inline: true,
+        }.setFooter({
           iconURL: interaction.guild.icon.toString(),
-          text: "Brought to you by, Wingstart"
+          text: "Brought to you by, Wingstart",
         })
-      )
-      await interaction.reply({ embeds: [embed] })
+      );
+    await interaction.reply({ embeds: [embed] });
   },
 };
