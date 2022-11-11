@@ -43,12 +43,12 @@ module.exports = {
         },
         { 
             name: "The server was created at: ",
-            value: interaction.guild.createdTimestamp,
+            value: interaction.guild.createdTimestamp.toString(),
             inline: true
         },
         {
             name: "You joined the server at: ",
-            value: interaction.guild.joinedTimestamp,
+            value: interaction.guild.joinedTimestamp.toString(),
             inline: true
         }
         .setFooter({
