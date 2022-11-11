@@ -55,7 +55,7 @@ module.exports = {
 
     // Fetches from APIs
     const weather = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.openwm}&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.OPENWTRMP}&units=metric`
     ).then((res) => res.json());
 
     const covid = await fetch(
