@@ -29,32 +29,42 @@ module.exports = {
   async execute(interaction) {
     const embed = new EmbedBuilder()
       .setColor(0xe26b21)
-      .setTitle(interaction.guild.name.toString())
-      .setDescription("Small community of friends.")
-      .setThumbnail(interaction.guild.icon.toString())
+      .setTitle(interaction.guild.name)
+      .setDescription(interaction.guild.description)
+      .setThumbnail(interaction.guild.iconURL())
       .setAuthor({
         name: `Glad you asked, ${interaction.member.displayName}`,
       })
       .addFields(
         {
-          name: "This server has: ",
+          name: "👥 User Count",
           value: `${interaction.guild.memberCount} members`,
           inline: true,
         },
         {
-          name: "The server was created at: ",
-          value: interaction.guild.createdTimestamp.toString(),
+          name: "🗣️ Channel Count",
+          value: `${interaction.guild.channels.channelCountWithoutThreads} channels`,
           inline: true,
         },
         {
-          name: "You joined the server at: ",
-          value: interaction.guild.joinedTimestamp.toString(),
+          name: "🎆 Server Creation",
+          value: `<t:${Math.round(
+            interaction.guild.createdTimestamp / 1000
+          ).toString()}:R>`,
           inline: true,
-        }.setFooter({
-          iconURL: interaction.guild.icon.toString(),
-          text: "Brought to you by, Wingstart",
-        })
-      );
+        },
+        {
+          name: "📆 Join Date",
+          value: `<t:${Math.round(
+            interaction.guild.joinedTimestamp / 1000
+          ).toString()}:R>`,
+          inline: true,
+        }
+      )
+      .setFooter({
+        iconURL: interaction.guild.iconURL(),
+        text: "Brought to you by, Wingstart",
+      });
     await interaction.reply({ embeds: [embed] });
   },
 };
