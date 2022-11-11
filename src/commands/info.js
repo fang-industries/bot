@@ -29,9 +29,9 @@ module.exports = {
   async execute(interaction) {
     const embed = new EmbedBuilder()
       .setColor(0xe26b21)
-      .setTitle(interaction.guild.name)
+      .setTitle(interaction.guild.name.toString())
       .setDescription("Small community of friends.")
-      .setThumbnail(interaction.guild.icon)
+      .setThumbnail(interaction.guild.icon.toString())
       .setAuthor({
             name: `Glad you asked, ${interaction.member.displayName}`
       })
@@ -52,7 +52,7 @@ module.exports = {
             inline: true
         }
         .setFooter({
-          iconURL: interaction.guild.icon,
+          iconURL: interaction.guild.icon.toString(),
           text: "Brought to you by, Wingstart"
         })
       )
