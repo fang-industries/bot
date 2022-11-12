@@ -75,8 +75,6 @@ module.exports = {
        * that are too old (14 days) to delete due to API limitations.
        */
 
-      console.log(deleteMsg);
-
       // Finally, reply to the user
       await interaction.reply({
         content: `Purging complete - ${deleteMsg.size} messages (containing the word \`${incl}\`) was deleted! 😈`,
@@ -100,8 +98,6 @@ module.exports = {
        * The `true` parameter tells `bulkDelete()` to skip messages
        * that are too old (14 days) to delete due to API limitations.
        */
-
-      console.log(deleteMsg);
 
       // Finally, reply to the user
       await interaction.reply({
