@@ -35,6 +35,11 @@ module.exports = {
       opt
         .setName("includes")
         .setDescription("Deletes messages that include the given string")
+    )
+    .addStringOption((opt) =>
+      opt
+        .setName("excludes")
+        .setDescription("Deletes messages that exclude the given string")
     ),
 
   // Execute the command asynchronously
@@ -75,6 +80,32 @@ module.exports = {
       // Finally, reply to the user
       await interaction.reply({
         content: `Purging complete - ${deleteMsg.size} messages (containing the word \`${incl}\`) was deleted! 😈`,
+        ephemeral: true,
+      });
+    } else if (interaction.options.getString("excludes")) {
+      // Define the included keyword to be deleted
+      const excl = interaction.options.getString("excludes");
+
+      // Fetch the messages from the given channel
+      const fetchMsg = await interaction.channel.messages.fetch({
+        limit: deleteAmount,
+      });
+
+      // If a message doesn't include this word, don't include in collection
+      const deleteMsg = await fetchMsg.filter((m) => !m.content.includes(excl));
+
+      // Burn those messages alive!
+      await interaction.channel.bulkDelete(deleteMsg, true);
+      /*                                              ^^^^
+       * The `true` parameter tells `bulkDelete()` to skip messages
+       * that are too old (14 days) to delete due to API limitations.
+       */
+
+      console.log(deleteMsg);
+
+      // Finally, reply to the user
+      await interaction.reply({
+        content: `Purging complete - ${deleteMsg.size} messages (not containing the word \`${excl}\`) was deleted! 😈`,
         ephemeral: true,
       });
     } else {
