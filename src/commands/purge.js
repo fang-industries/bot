@@ -109,7 +109,11 @@ module.exports = {
       const deleteAmount = interaction.options.getInteger("amount");
 
       // Delete the given amount of messages
-      await interaction.channel.bulkDelete(deleteAmount);
+      await interaction.channel.bulkDelete(deleteAmount, true);
+      /*                                                 ^^^^
+       * The `true` parameter tells `bulkDelete()` to skip messages
+       * that are too old (14 days) to delete due to API limitations.
+       */
 
       // Finally, reply to the user
       await interaction.reply({
