@@ -29,6 +29,7 @@ module.exports = {
         .setName("amount")
         .setDescription("Set the amount of messages deleted.")
         .setMaxValue(100)
+        .setRequired(true)
     ),
 
   // Execute the command asynchronously
