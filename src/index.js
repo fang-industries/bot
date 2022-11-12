@@ -10,6 +10,7 @@
 
 // Import the required modules and load from .env file
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const config = require("../config.json");
 require("dotenv").config();
 
 // Clear the console when started
