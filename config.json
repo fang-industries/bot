@@ -1,4 +1,8 @@
 {
+  "bot": {
+    "owner": "700366338094268486",
+    "debug": "1040248193708998668"
+  },
   "misc": {
     "timezone": "Asia/Jakarta",
     "location": "Jakarta"

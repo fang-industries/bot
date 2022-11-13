@@ -1,6 +1,6 @@
 /*
- * This is the /gospel command. It spits out random
- * parodies of bible verses. We stayed up for this.
+ * This is the /guild command. It displays the
+ * information about this guild.
  *
  * Made with <3 by Jason and Jovan
  *
@@ -14,19 +14,24 @@ const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 // Export the command data for loader
 module.exports = {
   /*
-   * Command      : /gospel
-   * Description  : Some words of wisdom from the almighty chicken God.
+   * Command      : /guild
+   * Description  : Displays this server's information
    *
-   * What it does : i honestly don't know anymore man
+   * What it does : The command returns with the server's
+   *                information, incl. user count, channel count,
+   *                creation date, user join date, and an explanation
+   *                for all roles in the guild, customisable in
+   *                miscellaneous/assets/roles.json
    */
 
   // Define data for loader
   data: new SlashCommandBuilder()
-    .setName("info")
-    .setDescription("Displays server information."),
+    .setName("guild")
+    .setDescription("Displays this server's information."),
 
   // Execute the command asynchronously
   async execute(interaction) {
+    // Create an embed to return with
     const embed = new EmbedBuilder()
       .setColor(0xe26b21)
       .setTitle(interaction.guild.name)
@@ -66,6 +71,8 @@ module.exports = {
         iconURL: interaction.guild.iconURL(),
         text: "Brought to you by, Wingstart",
       });
+
+    // Reply to the user
     await interaction.reply({ embeds: [embed] });
   },
 };
