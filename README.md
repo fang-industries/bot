@@ -1,18 +1,12 @@
-# Discord.js Bot Template
+# fang-industries/bot
 
-[![](https://img.shields.io/npm/v/discord.js?label=discord.js)](https://github.com/discordjs)
+private, (but also open-source) discord bot for our private community - Fang Industries.
 
-> Simple Discord.js bot template to help me kickstart my Discord.js projects!
+main collaborators: me & ryirio
 
-- Supports both slash and legacy commands!
-- Very cool console logging
+### contributing
 
-## TODO
-
-- [ ] Fix statistics
-- [ ] Support arrays for owner
-- [ ] Update command to pull from git repo
-
-## License
-
-Licensed under the GNU-GPLv3.0 license. See the file `LICENSE` for more information.
+* use commit conventions (e.g: `fix(pin): major issue` or `feat(cmd): add pin command`)
+* make sure you format your code with prettier to ensure consistent coding styles
+* populate your code with the given comments on every other command and event and file there is
+* work on different branches, never work on main
