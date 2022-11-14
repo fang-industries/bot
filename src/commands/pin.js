@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, messageLink } = require('discord.js')
 
 module.exports = {
 
@@ -13,8 +13,9 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        const messageID = interaction.options.getString('Message ID')
-        const channel = interaction.guild.channels.find(ch => ch.name === 'hall-of-fame')
-        await channel.send(messageID)
+        const msgID = interaction.options.getString('Message ID')
+        const channelID = interaction.guild.channels.find(ch => ch.name === 'hall-of-fame')
+        const fetchmsg = interaction.channel.fetchMessage(msgID)
+        await console.log(fetchmsg)
     }
 }
