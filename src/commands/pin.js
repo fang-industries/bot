@@ -13,9 +13,9 @@ module.exports = {
         ),
 
     async execute(interaction) {
-        const msgID = interaction.options.getString("ID")
+        const targetMessage = interaction.options.getString("ID")
         const channelID = interaction.guild.channels.find(ch => ch.name === 'hall-of-fame')
-        const fetchmsg = interaction.channel.fetchMessage(msgID)
+        const fetchmsg = interaction.channel.fetchMessage(targetMessage)
         await console.log(fetchmsg)
     }
 }
