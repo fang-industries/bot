@@ -40,5 +40,5 @@ process.on("unhandledRejection", (e) => {
 
   // Log to error to debug channel
   const channel = client.channels.cache.get(config.bot.debug);
-  console.log(`I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``);
+  channel.send(`I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``);
 });
