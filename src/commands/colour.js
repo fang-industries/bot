@@ -32,9 +32,6 @@ module.exports = {
         .setName("hex")
         .setDescription("Provide a hex code for your role colour.")
         .setRequired(true)
-    )
-    .addStringOption((opt) =>
-      opt.setName("name").setDescription("What would you like your role named?")
     ),
 
   // Execute the command asynchronously
@@ -50,28 +47,50 @@ module.exports = {
       return null;
     }
 
-    // Create role for user
-    const role = await interaction.guild.roles.create({
-      name:
-        interaction.options.getString("name") ?? interaction.member.displayName,
-      color: "0x" + (parseColour() ?? interaction.options.getString("hex")),
-    });
+    // Check if a member already has a colour role
+    if (
+      interaction.guild.roles.cache.find(
+        (role) => role.name === interaction.member.id.toString()
+      )
+    ) {
+      const role = interaction.guild.roles.cache.find(
+        (role) => role.name === interaction.member.id.toString()
+      );
 
-    // Give the user the newly created role
-    const givenRole = interaction.guild.roles.cache.get(role.id);
-    interaction.member.roles.add(givenRole).catch((e) => {
-      // Log the error to console
-      console.error(e);
+      role.edit({
+        color: "0x" + (parseColour() ?? interaction.options.getString("hex")),
+      });
 
-      // Log to error to debug channel
-      const channel = client.channels.cache.get(config.bot.debug);
-      channel.send(`I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``);
-    });
+      // Finally, reply with a response to the user
+      await interaction.reply({
+        content: "I've changed your role colour!",
+        ephemeral: true,
+      });
+    } else {
+      // Create role for user
+      const role = await interaction.guild.roles.create({
+        name: interaction.member.id.toString(),
+        color: "0x" + (parseColour() ?? interaction.options.getString("hex")),
+      });
 
-    // Finally, reply with a response to the user
-    await interaction.reply({
-      content: "I've given you the role!",
-      ephemeral: true,
-    });
+      // Give the user the newly created role
+      const givenRole = interaction.guild.roles.cache.get(role.id);
+      interaction.member.roles.add(givenRole).catch((e) => {
+        // Log the error to console
+        console.error(e);
+
+        // Log to error to debug channel
+        const channel = client.channels.cache.get(config.bot.debug);
+        channel.send(
+          `I've ran into an issue! Check this out:\n\`\`\`${e}\`\`\``
+        );
+      });
+
+      // Finally, reply with a response to the user
+      await interaction.reply({
+        content: "I've given you the role!",
+        ephemeral: true,
+      });
+    }
   },
 };
