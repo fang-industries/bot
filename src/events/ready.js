@@ -12,6 +12,11 @@
 const { Events } = require("discord.js");
 const config = require("../../config.json");
 
+// Import express.js for invitation API
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
 // Export the command data for loader
 module.exports = {
   /*
@@ -27,11 +32,49 @@ module.exports = {
   once: true,
 
   // Execute the event
-  execute(client) {
+  async execute(client) {
+    // Define port to use for API
+    const port = 10000;
+
     console.log("The bot is ready! Logged in as " + client.user.tag);
 
     // Send a message to the debug channel
     const channel = client.channels.cache.get(config.bot.debug);
     channel.send("Bot is online!");
+
+    // Initialise express.js
+    const app = express().use(cors()).use(bodyParser.json());
+
+    // Where should new users be invited to?
+    const inviteChannel = client.channels.cache.get(config.bot.inviteChannel);
+
+    app.listen(10000, function (err) {
+      if (err) console.log(err);
+      console.log("API is running on port", port.toString());
+
+      channel.send(
+        "Wingstart's invite API is running on port " + port.toString()
+      );
+    });
+
+    // Post new invite on API
+    app.get("/", async function (req, res) {
+      const fetchInvites = await inviteChannel.fetchInvites();
+
+      invArr = Array.from(fetchInvites?.keys());
+
+      res.json({ invite: invArr[0] });
+    });
+
+    // Create a new invite that expires in 30 minutes, every 30 minutes.
+    setInterval(() => {
+      inviteChannel.createInvite({
+        maxAge: 30 * 60,
+        maxUses: 3,
+        unique: true,
+      });
+
+      console.log("I've created an invite!");
+    }, 30 * 60 * 1000);
   },
 };
