@@ -34,7 +34,7 @@ module.exports = {
   // Execute the event
   async execute(client) {
     // Define port to use for API
-    const port = 10000;
+    const port = 25000;
 
     console.log("The bot is ready! Logged in as " + client.user.tag);
 
