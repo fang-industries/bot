@@ -43,7 +43,9 @@ module.exports = {
     channel.send("Bot is online!");
 
     // Initialise express.js
-    const app = express().use(cors()).use(bodyParser.json());
+    const app = express();
+    app.use(cors());
+    app.use(bodyParser.json());
 
     // Where should new users be invited to?
     const inviteChannel = client.channels.cache.get(config.bot.inviteChannel);
@@ -58,12 +60,12 @@ module.exports = {
     });
 
     // Post new invite on API
-    app.get("/", async function (req, res) {
+    app.get("/inv", async function (req, res) {
       const fetchInvites = await inviteChannel.fetchInvites();
 
       invArr = Array.from(fetchInvites?.keys());
 
-      res.json({ invite: invArr[0] });
+      res.json([invArr[0]]);
     });
 
     // Create a new invite that expires in 30 minutes, every 30 minutes.
