@@ -91,13 +91,13 @@ module.exports = {
       ) {
         interaction.member.roles.remove("1055374938556616724");
         return interaction.reply({
-          content: "I've removed your writing role!",
+          content: "I've removed your debate role!",
           ephemeral: true,
         });
       } else {
         interaction.member.roles.add("1055374938556616724");
         return interaction.reply({
-          content: "I've given you the writing role!",
+          content: "I've given you the debate role!",
           ephemeral: true,
         });
       }
