@@ -34,7 +34,8 @@ module.exports = {
         .setRequired(true)
         .addChoices(
           { name: "Coding (Wingstart, fangdustry.me)", value: "coding" },
-          { name: "Writing (stories.fangdustry.me, etc.)", value: "writing" }
+          { name: "Writing (stories.fangdustry.me, etc.)", value: "writing" },
+          { name: "Debate (#hot-takes channel)", value: "debate" }
         )
     ),
 
@@ -75,6 +76,26 @@ module.exports = {
         });
       } else {
         interaction.member.roles.add("1055372629311238255");
+        return interaction.reply({
+          content: "I've given you the writing role!",
+          ephemeral: true,
+        });
+      }
+    }
+
+    if (role === "debate") {
+      if (
+        interaction.member.roles.cache.some(
+          (r) => r.id === "1055374938556616724"
+        )
+      ) {
+        interaction.member.roles.remove("1055374938556616724");
+        return interaction.reply({
+          content: "I've removed your writing role!",
+          ephemeral: true,
+        });
+      } else {
+        interaction.member.roles.add("1055374938556616724");
         return interaction.reply({
           content: "I've given you the writing role!",
           ephemeral: true,
